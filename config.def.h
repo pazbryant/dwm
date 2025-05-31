@@ -129,7 +129,7 @@ static const Key keys[] = {
 		{ MODKEY,               XK_Return,          spawn,          SHCMD("thorium-browser") },
 		{ MODKEY,               XK_a,               spawn,          SHCMD("~/bin/wm/passmenu") },
 		{ MODKEY,               XK_s,               spawn,          SHCMD("~/bin/wm/screenkey") },
-		{ MODKEY|ShiftMask,     XK_r,               spawn,          SHCMD("~/bin/global/recording") },
+		{ MODKEY|ShiftMask,     XK_r,               spawn,          SHCMD("~/bin/wm/recording") },
 		{ MODKEY,               XK_o,               spawn,          SHCMD("~/bin/wm/passmenu --otp") },
 		{ MODKEY,               XK_b,               spawn,          SHCMD("~/bin/wm/set-brightness") },
 		{ MODKEY,               XK_m,               spawn,          SHCMD("st -t ncmpcpp -e ncmpcpp") },
