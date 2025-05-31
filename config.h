@@ -70,16 +70,16 @@ static const char *tags[] = {
 
 /* WM Class Rules */
 static const Rule rules[] = {
-    /* class                instance    title       tags mask     iscentered   isfloating   monitor   switchtotag */
-    { "jetbrains-datagrip",  NULL,       NULL,       1 << 3,       0,           0,           -1,      0 },
-    { "Postman",             NULL,       NULL,       1 << 4,       0,           0,           -1,      0 },
-    { "bruno",               NULL,       NULL,       1 << 4,       0,           0,           -1,      0 },
-    { "calibre",             NULL,       NULL,       1 << 5,       0,           0,           -1,      0 },
-    { "qBittorrent",         NULL,       NULL,       1 << 5,       0,           0,           -1,      0 },
-    { "mpv",                 NULL,       NULL,       1 << 6,       1,          -1,           -1,      0 },
-    { "vesktop",             NULL,       NULL,       1 << 7,       0,           0,           -1,      0 },
-    { "St",                  NULL,       "ncmpcpp",  0,            1,          -1,           -1,      0 },
-    { "Nsxiv",               NULL,       NULL,       0,            1,           1,           -1,      0 },
+    /* class                 instance    title       tags mask  switchtotag   iscentered   isfloating   monitor    */
+    { "jetbrains-datagrip",  NULL,       NULL,       1 << 3,    0,						0,           0,           -1 },
+    { "Postman",             NULL,       NULL,       1 << 4,    0,    				0,           0,           -1 },
+    { "bruno",               NULL,       NULL,       1 << 4,    0,    				0,           0,           -1 },
+    { "calibre",             NULL,       NULL,       1 << 5,    0,    				0,           0,           -1 },
+    { "qBittorrent",         NULL,       NULL,       1 << 5,    0,    				0,           0,           -1 },
+    { "mpv",                 NULL,       NULL,       1 << 6,    1,    				1,          -1,           -1 },
+    { "vesktop",             NULL,       NULL,       1 << 7,    0,    				0,           0,           -1 },
+    { "St",                  NULL,       "ncmpcpp",  0,         0,    				1,          -1,           -1 },
+    { "Nsxiv",               NULL,       NULL,       0,         0,    				1,           1,           -1 },
 };
 
 /* Layouts */
