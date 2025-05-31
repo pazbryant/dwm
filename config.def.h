@@ -68,16 +68,16 @@ static const char *tags[] = {
 
 /* WM Class Rules */
 static const Rule rules[] = {
-    /* class                instance    title       tags mask     iscentered   isfloating   monitor */
-    { "jetbrains-datagrip",  NULL,       NULL,       1 << 3,       0,           0,           -1 },
-    { "Postman",             NULL,       NULL,       1 << 4,       0,           0,           -1 },
-    { "bruno",               NULL,       NULL,       1 << 4,       0,           0,           -1 },
-    { "calibre",             NULL,       NULL,       1 << 5,       0,           0,           -1 },
-    { "qBittorrent",         NULL,       NULL,       1 << 5,       0,           0,           -1 },
-    { "mpv",                 NULL,       NULL,       1 << 6,       1,          -1,           -1 },
-    { "vesktop",             NULL,       NULL,       1 << 7,       0,           0,           -1 },
-    { "St",                  NULL,       "ncmpcpp",  0,            1,          -1,           -1 },
-    { "Nsxiv",               NULL,       NULL,       0,            1,           1,           -1 },
+    /* class                instance    title       tags mask     iscentered   isfloating   monitor   switchtotag */
+    { "jetbrains-datagrip",  NULL,       NULL,       1 << 3,       0,           0,           -1,      0 },
+    { "Postman",             NULL,       NULL,       1 << 4,       0,           0,           -1,      0 },
+    { "bruno",               NULL,       NULL,       1 << 4,       0,           0,           -1,      0 },
+    { "calibre",             NULL,       NULL,       1 << 5,       0,           0,           -1,      0 },
+    { "qBittorrent",         NULL,       NULL,       1 << 5,       0,           0,           -1,      0 },
+    { "mpv",                 NULL,       NULL,       1 << 6,       1,          -1,           -1,      0 },
+    { "vesktop",             NULL,       NULL,       1 << 7,       0,           0,           -1,      0 },
+    { "St",                  NULL,       "ncmpcpp",  0,            1,          -1,           -1,      0 },
+    { "Nsxiv",               NULL,       NULL,       0,            1,           1,           -1,      0 },
 };
 
 /* Layouts */
@@ -124,7 +124,6 @@ static const Key keys[] = {
 		{ MODKEY,               XK_e,								spawn,          SHCMD("st -e yazi") },
 		{ MODKEY,               XK_t,               spawn,          {.v = termcmd } },
 		{ MODKEY|ShiftMask,     XK_t,               spawn,          SHCMD("alacritty") },
-		{ MODKEY,               XK_i,               spawn,          SHCMD("~/bin/wm/bg") },
 		{ MODKEY,               XK_r,               spawn,          SHCMD("~/bin/wm/read") },
 		{ MODKEY,               XK_d,               spawn,          SHCMD("rofi -show run") },
 		{ MODKEY,               XK_Return,          spawn,          SHCMD("thorium-browser") },
@@ -135,6 +134,7 @@ static const Key keys[] = {
 		{ MODKEY,               XK_b,               spawn,          SHCMD("~/bin/wm/set-brightness") },
 		{ MODKEY,               XK_m,               spawn,          SHCMD("st -t ncmpcpp -e ncmpcpp") },
 		{ MODKEY,               XK_space,           spawn,          SHCMD("~/bin/wm/switch-keyboard") },
+		{ MODKEY,               XK_i,               spawn,          SHCMD("~/bin/wm/select-background") },
 		{ MODKEY|ShiftMask,     XK_Return,          spawn,          SHCMD("thorium-browser --user-data-dir=/home/bryant/.config/thorium-work") },
 		{ MODKEY|ShiftMask,     XK_c,               spawn,          SHCMD("mpv --volume=100 ~/Documents/github/media/videos/biy/cristiano.mp4") },
 
