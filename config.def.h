@@ -127,6 +127,7 @@ static const Key keys[] = {
 		{ MODKEY,               XK_t,               spawn,          {.v = termcmd } },
 		{ MODKEY|ShiftMask,     XK_t,               spawn,          SHCMD("alacritty") },
 		{ MODKEY,               XK_r,               spawn,          SHCMD("~/bin/wm/read") },
+		{ MODKEY,               XK_v,               spawn,          SHCMD("~/bin/wm/watch") },
 		{ MODKEY,               XK_d,               spawn,          SHCMD("rofi -show run") },
 		{ MODKEY,               XK_Return,          spawn,          SHCMD("thorium-browser") },
 		{ MODKEY,               XK_a,               spawn,          SHCMD("~/bin/wm/passmenu") },

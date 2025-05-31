@@ -2376,14 +2376,16 @@ unmanage(Client *c, int destroyed)
 		XSetErrorHandler(xerror);
 		XUngrabServer(dpy);
 	}
-	free(c);
-	focus(NULL);
-	updateclientlist();
-	arrange(m);
+
 	if (c->switchtotag) {
 		Arg a = { .ui = c->switchtotag };
 		view(&a);
 	}
+
+	free(c);
+	focus(NULL);
+	updateclientlist();
+	arrange(m);
 }
 
 void
