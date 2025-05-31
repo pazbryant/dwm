@@ -1,14 +1,10 @@
-
-/* See LICENSE file for copyright and license details. */
-
 /* Includes for media keys */
 #include <X11/XF86keysym.h>
 
 /* Appearance */
-static const unsigned int borderpx            = 2;        /* border pixel of windows */
 static const unsigned int snap                = 32;       /* snap pixel */
+static const unsigned int borderpx            = 2;        /* border pixel of windows */
 
-/* Manage gaps, gaps by default = 0 */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
@@ -16,15 +12,15 @@ static const unsigned int gappoh    = 0;       /* horiz outer gap between window
 static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
 
 /* System Tray */
+static const int showsystray                  = 1;
 static const unsigned int systraypinning      = 0;
 static const unsigned int systrayonleft       = 0;
 static const unsigned int systrayspacing      = 2;
 static const int systraypinningfailfirst      = 1;
-static const int showsystray                  = 1;
 
 /* Bar */
-static const int showbar                      = 1;
 static const int topbar                       = 0;
+static const int showbar                      = 1;
 
 /* Fonts */
 static const char *fonts[] = {
@@ -33,25 +29,25 @@ static const char *fonts[] = {
 };
 
 /* XRDB Colors */
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
 static char selbgcolor[]            = "#005577";
+static char normbgcolor[]           = "#222222";
+static char normfgcolor[]           = "#bbbbbb";
+static char selbordercolor[]        = "#005577";
+static char normbordercolor[]       = "#444444";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
 };
 
 /* Autostart */
 static const char *const autostart[] = {
-    "sh", "-c", "~/.fehbg &", NULL,
-    "sh", "-c", "pgrep -x \"picom\" >/dev/null || picom &", NULL,
-    "sh", "-c", "pgrep -x \"dunst\" >/dev/null || dunst &", NULL,
-    "sh", "-c", "xset s off -dpms &", NULL,
-    "sh", "-c", "/home/bryant/Documents/github/dotfiles/bin/global/dwmstylebar &", NULL,
+		"sh", "-c", "~/.fehbg &", NULL,
+		"sh", "-c", "xset s off -dpms &", NULL,
+		"sh", "-c", "pgrep -x \"dunst\" >/dev/null || dunst &", NULL,
+		"sh", "-c", "pgrep -x \"picom\" >/dev/null || picom &", NULL,
+		"sh", "-c", "/home/bryant/Documents/github/dotfiles/bin/global/dwmstylebar &", NULL,
     NULL
 };
 
@@ -85,9 +81,9 @@ static const Rule rules[] = {
 };
 
 /* Layouts */
-static const float mfact     = 0.50;
 static const int nmaster     = 1;
 static const int resizehints = 1;
+static const float mfact     = 0.50;
 static const int lockfullscreen = 1;
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
@@ -121,41 +117,40 @@ static const Key keys[] = {
     /* modifier             key                 function        argument */
 
     /* --- WM Control & Session --- */
-    { MODKEY,               XK_q,               killclient,     {0} },
-    { MODKEY|Mod1Mask,      XK_e,               quit,           {0} },
+		{ MODKEY,               XK_q,               killclient,     {0} },
+		{ MODKEY|Mod1Mask,      XK_e,               quit,           {0} },
 
     /* --- Application Launchers --- */
-    { MODKEY,               XK_d,               spawn,          SHCMD("rofi -show run") },
-    { MODKEY,               XK_t,               spawn,          {.v = termcmd } },
-    { MODKEY|ShiftMask,     XK_t,               spawn,          SHCMD("alacritty") },
-    { MODKEY,               XK_Return,          spawn,          SHCMD("thorium-browser") },
-    { MODKEY|ShiftMask,     XK_Return,          spawn,          SHCMD("thorium-browser --user-data-dir=/home/bryant/.config/thorium-work") },
-    { MODKEY,               XK_e,               spawn,          SHCMD("pcmanfm") },
-    { MODKEY,               XK_a,               spawn,          SHCMD("~/bin/wm/passmenu") },
-    { MODKEY,               XK_o,               spawn,          SHCMD("~/bin/wm/passmenu --otp") },
-    { MODKEY,               XK_minus,           spawn,          SHCMD("st -e yazi") },
-    { MODKEY,               XK_m,               spawn,          SHCMD("st -t ncmpcpp -e ncmpcpp") },
-    { MODKEY,               XK_i,               spawn,          SHCMD("~/bin/wm/bg") },
-    { MODKEY,               XK_b,               spawn,          SHCMD("~/bin/wm/set-brightness") },
-    { MODKEY,               XK_s,               spawn,          SHCMD("~/bin/wm/screenkey") },
-    { MODKEY,               XK_r,               spawn,          SHCMD("~/bin/wm/read") },
-    { MODKEY|ShiftMask,     XK_r,               spawn,          SHCMD("~/bin/global/recording") },
-    { MODKEY|ShiftMask,     XK_c,               spawn,          SHCMD("mpv --volume=100 ~/Documents/github/media/videos/biy/cristiano.mp4") },
-    { MODKEY,               XK_space,           spawn,          SHCMD("~/bin/wm/switch-keyboard") },
+		{ MODKEY,               XK_e,								spawn,          SHCMD("st -e yazi") },
+		{ MODKEY,               XK_t,               spawn,          {.v = termcmd } },
+		{ MODKEY|ShiftMask,     XK_t,               spawn,          SHCMD("alacritty") },
+		{ MODKEY,               XK_i,               spawn,          SHCMD("~/bin/wm/bg") },
+		{ MODKEY,               XK_r,               spawn,          SHCMD("~/bin/wm/read") },
+		{ MODKEY,               XK_d,               spawn,          SHCMD("rofi -show run") },
+		{ MODKEY,               XK_Return,          spawn,          SHCMD("thorium-browser") },
+		{ MODKEY,               XK_a,               spawn,          SHCMD("~/bin/wm/passmenu") },
+		{ MODKEY,               XK_s,               spawn,          SHCMD("~/bin/wm/screenkey") },
+		{ MODKEY|ShiftMask,     XK_r,               spawn,          SHCMD("~/bin/global/recording") },
+		{ MODKEY,               XK_o,               spawn,          SHCMD("~/bin/wm/passmenu --otp") },
+		{ MODKEY,               XK_b,               spawn,          SHCMD("~/bin/wm/set-brightness") },
+		{ MODKEY,               XK_m,               spawn,          SHCMD("st -t ncmpcpp -e ncmpcpp") },
+		{ MODKEY,               XK_space,           spawn,          SHCMD("~/bin/wm/switch-keyboard") },
+		{ MODKEY|ShiftMask,     XK_Return,          spawn,          SHCMD("thorium-browser --user-data-dir=/home/bryant/.config/thorium-work") },
+		{ MODKEY|ShiftMask,     XK_c,               spawn,          SHCMD("mpv --volume=100 ~/Documents/github/media/videos/biy/cristiano.mp4") },
 
     /* --- Window Management --- */
-    { MODKEY,               XK_l,               focusstack,     {.i = +1 } },
-    { MODKEY,               XK_h,               focusstack,     {.i = -1 } },
-    { MODKEY,               XK_n,               viewnext,       {0} },
-    { MODKEY,               XK_p,               viewprev,       {0} },
-    { MODKEY,               XK_f,               togglefullscr,  {0} },
-    { MODKEY,               XK_w,               togglefloating, {0} },
-    { MODKEY|ShiftMask,     XK_w,               togglebar,      {0} },
-    { MODKEY|Mod1Mask,      XK_l,               setmfact,       {.f = +0.05} },
-    { MODKEY|Mod1Mask,      XK_h,               setmfact,       {.f = -0.05} },
-    { MODKEY,               XK_Tab,             zoom,           {0} },
-    { MODKEY,               XK_Escape,          view,           {0} },
+		{ MODKEY,               XK_w,               togglefloating, {0} },
+		{ MODKEY,               XK_f,               togglefullscr,  {0} },
+		{ MODKEY,               XK_Escape,          view,           {0} },
+		{ MODKEY,               XK_p,               viewprev,       {0} },
+		{ MODKEY,               XK_Tab,             zoom,           {0} },
+		{ MODKEY,               XK_n,               viewnext,       {0} },
+		{ MODKEY|ShiftMask,     XK_w,               togglebar,      {0} },
 		{ MODKEY,               XK_F5,							xrdb,           {.v = NULL } },
+		{ MODKEY,               XK_l,               focusstack,     {.i = +1 } },
+		{ MODKEY,               XK_h,               focusstack,     {.i = -1 } },
+		{ MODKEY|Mod1Mask,      XK_l,               setmfact,       {.f = +0.05} },
+		{ MODKEY|Mod1Mask,      XK_h,               setmfact,       {.f = -0.05} },
 
     /* --- Tags --- */
     TAGKEYS(XK_bracketleft, 0)
@@ -180,23 +175,23 @@ static const Key keys[] = {
     TAGKEYS(XK_0,           9)
 
     /* --- Screenshots --- */
-    { 0,          XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s clip && notify-send 'Saved in clipboard'") },
-    { Mod1Mask,   XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s save && notify-send 'Saved in disk'") },
-    { MODKEY,     XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s clip && notify-send 'Saved in clipboard'") },
-    { ControlMask,XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s save && notify-send 'Saved in disk'") },
+		{ ControlMask,XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s save && notify-send 'Saved in disk'") },
+		{ Mod1Mask,   XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s save && notify-send 'Saved in disk'") },
+		{ MODKEY,     XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s clip && notify-send 'Saved in clipboard'") },
+		{ 0,          XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s clip && notify-send 'Saved in clipboard'") },
 
     /* --- Hardware Keys --- */
-    { 0, XF86XK_AudioLowerVolume, spawn, SHCMD("~/bin/wm/volume-dunst down") },
-    { 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("~/bin/wm/volume-dunst up") },
-    { 0, XF86XK_AudioMute,        spawn, SHCMD("~/bin/wm/volume-dunst mute") },
+		{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("~/bin/wm/volume-dunst up") },
+		{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("~/bin/wm/volume-dunst down") },
+		{ 0, XF86XK_AudioMute,        spawn, SHCMD("~/bin/wm/volume-dunst mute") },
 };
 
 /* Mouse buttons */
 static const Button buttons[] = {
-    { ClkLtSymbol,     0, Button1, setlayout,  {0} },
-    { ClkClientWin, MODKEY, Button1, movemouse,  {0} },
-    { ClkClientWin, MODKEY, Button3, resizemouse,{0} },
-    { ClkTagBar,    0, Button1, view,        {0} },
+		{ ClkTagBar,    0, Button1, view,        {0} },
+		{ ClkLtSymbol,     0, Button1, setlayout,  {0} },
+		{ ClkClientWin, MODKEY, Button3, resizemouse,{0} },
+		{ ClkClientWin, MODKEY, Button1, movemouse,  {0} },
 };
 
 /* signal definitions */
