@@ -10,10 +10,10 @@ static const unsigned int snap                = 32;       /* snap pixel */
 
 /* Manage gaps, gaps by default = 0 */
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
 
 /* System Tray */
 static const unsigned int systraypinning      = 0;
@@ -60,6 +60,8 @@ static const char *tags[] = {
     "󰎤", "󰎧", "󰎪", "󰎭", "󰎱", "󰎳", "󰎶", "󰎹", "󰎼", "󰽽",
 };
 
+
+/* WM Class Rules */
 static const Rule rules[] = {
     /* class                instance    title       tags mask     iscentered   isfloating   monitor */
     { "jetbrains-datagrip",  NULL,       NULL,       1 << 3,       0,           0,           -1 },
@@ -99,6 +101,7 @@ static const Layout layouts[] = {
     { MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
     { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
+/* Utility to run sh commands */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* Commands */
@@ -185,4 +188,12 @@ static const Button buttons[] = {
     { ClkClientWin, MODKEY, Button1, movemouse,  {0} },
     { ClkClientWin, MODKEY, Button3, resizemouse,{0} },
     { ClkTagBar,    0, Button1, view,        {0} },
+};
+
+/* signal definitions */
+/* signum must be greater than 0 */
+/* trigger signals using `xsetroot -name "fsignal:<signum>"` */
+static Signal signals[] = {
+	/* signum       function        argument  */
+	{ 1,            xrdb,						{.v = 0} },
 };
