@@ -9,11 +9,11 @@ static const unsigned int borderpx            = 2;        /* border pixel of win
 static const unsigned int snap                = 32;       /* snap pixel */
 
 /* Manage gaps, gaps by default = 0 */
+static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 5;        /* 1 means no outer gap when there is only one window */
 
 /* System Tray */
 static const unsigned int systraypinning      = 0;
@@ -26,22 +26,23 @@ static const int showsystray                  = 1;
 static const int showbar                      = 1;
 static const int topbar                       = 0;
 
-/* Fonts and Colors */
+/* Fonts */
 static const char *fonts[] = {
     "Overpass:size=10:weight=Bold:antialias=true:autohint=true",
     "Noto Color Emoji:pixelsize=10:antialias=true:autohint=true",
 };
 
-static const char col_gray1[] = "#222222";
-static const char col_gray2[] = "#444444";
-static const char col_gray3[] = "#bbbbbb";
-static const char col_gray4[] = "#eeeeee";
-static const char col_cyan[]  = "#005577";
-
-static const char *colors[][3] = {
-    /*               fg         bg         border   */
-    [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-    [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+/* XRDB Colors */
+static char normbgcolor[]           = "#222222";
+static char normbordercolor[]       = "#444444";
+static char normfgcolor[]           = "#bbbbbb";
+static char selfgcolor[]            = "#eeeeee";
+static char selbordercolor[]        = "#005577";
+static char selbgcolor[]            = "#005577";
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 /* Autostart */
@@ -61,11 +62,11 @@ static const char *tags[] = {
 
 static const Rule rules[] = {
     /* class                instance    title       tags mask     iscentered   isfloating   monitor */
-    { "jetbrains-datagrip", NULL,       NULL,       1 << 3,       0,           0,           -1 },
+    { "jetbrains-datagrip",  NULL,       NULL,       1 << 3,       0,           0,           -1 },
     { "Postman",             NULL,       NULL,       1 << 4,       0,           0,           -1 },
     { "bruno",               NULL,       NULL,       1 << 4,       0,           0,           -1 },
     { "calibre",             NULL,       NULL,       1 << 5,       0,           0,           -1 },
-    { "qBittorrent",        NULL,       NULL,       1 << 5,       0,           0,           -1 },
+    { "qBittorrent",         NULL,       NULL,       1 << 5,       0,           0,           -1 },
     { "mpv",                 NULL,       NULL,       1 << 6,       1,          -1,           -1 },
     { "vesktop",             NULL,       NULL,       1 << 7,       0,           0,           -1 },
     { "St",                  NULL,       "ncmpcpp",  0,            1,          -1,           -1 },
@@ -142,6 +143,7 @@ static const Key keys[] = {
     { MODKEY|Mod1Mask,      XK_h,               setmfact,       {.f = -0.05} },
     { MODKEY,               XK_Tab,             zoom,           {0} },
     { MODKEY,               XK_Escape,          view,           {0} },
+		{ MODKEY,               XK_F5,							xrdb,           {.v = NULL } },
 
     /* --- Tags --- */
     TAGKEYS(XK_bracketleft, 0)
