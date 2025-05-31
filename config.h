@@ -8,6 +8,13 @@
 static const unsigned int borderpx            = 2;        /* border pixel of windows */
 static const unsigned int snap                = 32;       /* snap pixel */
 
+/* Manage gaps, gaps by default = 0 */
+static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
+static       int smartgaps          = 5;        /* 1 means no outer gap when there is only one window */
+
 /* System Tray */
 static const unsigned int systraypinning      = 0;
 static const unsigned int systrayonleft       = 0;
@@ -71,11 +78,16 @@ static const int nmaster     = 1;
 static const int resizehints = 1;
 static const int lockfullscreen = 1;
 
+#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#include "vanitygaps.c"
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
+	{ "[\\]",     dwindle },
+	{ "[M]",      monocle },
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ NULL,       NULL },
 };
 
 /* Key Definitions */
