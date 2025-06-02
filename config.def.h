@@ -49,7 +49,6 @@ static const char *const autostart[] = {
 		"sh", "-c", "xset s off -dpms &", NULL,
 		"sh", "-c", "pgrep -x \"dunst\" >/dev/null || dunst &", NULL,
 		"sh", "-c", "pgrep -x \"picom\" >/dev/null || picom &", NULL,
-		"sh", "-c", "/home/bryant/Documents/github/dotfiles/bin/global/dwmstylebar &", NULL,
     NULL
 };
 
