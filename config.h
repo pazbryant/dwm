@@ -45,6 +45,7 @@ static char *colors[][3] = {
 
 /* Autostart */
 static const char *const autostart[] = {
+		"sh", "-c", "slstatus", NULL,
 		"sh", "-c", "~/.fehbg &", NULL,
 		"sh", "-c", "xset s off -dpms &", NULL,
 		"sh", "-c", "pgrep -x \"dunst\" >/dev/null || dunst &", NULL,
