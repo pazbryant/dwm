@@ -115,6 +115,7 @@ static const Layout layouts[] = {
 static const char *termcmd[] = { "st", NULL };
 
 /* Keys */
+#include "movestack.c"
 static const Key keys[] = {
     /* modifier             key                 function        argument */
 
@@ -152,6 +153,8 @@ static const Key keys[] = {
 		{ MODKEY,               XK_F5,							xrdb,           {.v = NULL } },
 		{ MODKEY,               XK_l,               focusstack,     {.i = +1 } },
 		{ MODKEY,               XK_h,               focusstack,     {.i = -1 } },
+		{ MODKEY|ShiftMask,     XK_l,               movestack,      {.i = +1 } },
+	  { MODKEY|ShiftMask,     XK_h,               movestack,      {.i = -1 } },
 		{ MODKEY|Mod1Mask,      XK_l,               setmfact,       {.f = +0.05} },
 		{ MODKEY|Mod1Mask,      XK_h,               setmfact,       {.f = -0.05} },
 		{ MODKEY,								XK_backslash,       setlayout,      {0} },
