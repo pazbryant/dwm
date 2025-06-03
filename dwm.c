@@ -1472,10 +1472,17 @@ manage(Window w, XWindowAttributes *wa)
 	}
 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
 	grabbuttons(c, 0);
-	if (!c->isfloating)
+	if (!c->isfloating) {
 		c->isfloating = c->oldstate = trans != None || c->isfixed;
-	if (c->isfloating)
+	}
+	if (c->isfloating) {
 		XRaiseWindow(dpy, c->win);
+
+		if (!c->iscentered) {
+			c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
+			c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
+		}
+	}
 	attach(c);
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
