@@ -7,11 +7,11 @@ static const unsigned int borderpx            = 2;        /* border pixel of win
 
 static const int tagpadding = -3;
 
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
+static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
+static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
 
 /* System Tray */
 static const int showsystray                  = 1;
