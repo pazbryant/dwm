@@ -99,7 +99,6 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ NULL,       NULL },
 };
 
 /* Key Definitions */
