@@ -50,6 +50,7 @@ static const char *const autostart[] = {
 		"sh", "-c", "xset s off -dpms &", NULL,
 		"sh", "-c", "pgrep -x \"dunst\" >/dev/null || dunst &", NULL,
 		"sh", "-c", "pgrep -x \"picom\" >/dev/null || picom &", NULL,
+		"sh", "-c", "pgrep -x \"greenclip\" >/dev/null || greenclip daemon &", NULL,
     NULL
 };
 
@@ -134,6 +135,7 @@ static const Key keys[] = {
 		{ MODKEY,               XK_a,               spawn,          SHCMD("~/bin/wm/passmenu") },
 		{ MODKEY|ShiftMask,     XK_r,               spawn,          SHCMD("~/bin/wm/recording") },
 		{ MODKEY,               XK_u,               spawn,          SHCMD("~/bin/wm/switch-sink") },
+		{ MODKEY,               XK_c,               spawn,          SHCMD("~/bin/wm/rofi-greenclip") },
 		{ MODKEY,               XK_b,               spawn,          SHCMD("~/bin/wm/set-brightness") },
 		{ MODKEY,               XK_n,								spawn,          SHCMD("~/bin/wm/switch-keyboard") },
 		{ MODKEY,               XK_o,               spawn,          SHCMD("~/bin/wm/passmenu --otp") },
