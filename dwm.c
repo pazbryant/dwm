@@ -2066,7 +2066,6 @@ setfullscreen(Client *c, int fullscreen)
 void
 setlayout(const Arg *arg)
 {
-	Layout *l;
 	int i;
 
 	if (arg && arg->v) {
