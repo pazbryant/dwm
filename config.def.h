@@ -1,71 +1,99 @@
-/* See LICENSE file for copyright and license details. */
+/* Includes for media keys */
+#include <X11/XF86keysym.h>
 
-/* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
-static char *colors[][3] = {
-       /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+/* Appearance */
+static const unsigned int snap                = 32;       /* snap pixel */
+static const unsigned int borderpx            = 2;        /* border pixel of windows */
+
+/* Bar */
+static const int topbar                       = 0;
+static const int showbar                      = 1;
+
+/* Fonts */
+static const char *fonts[] = {
+    "sans-serif:size=10:weight=Bold:antialias=true:autohint=true",
+    "Noto Color Emoji:pixelsize=10:antialias=true:autohint=true",
 };
 
-/* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-
+/* XRDB Colors */
+static char selfgcolor[]            = "#eeeeee";
+static char selbgcolor[]            = "#005577";
+static char normbgcolor[]           = "#222222";
+static char normfgcolor[]           = "#bbbbbb";
+static char selbordercolor[]        = "#005577";
+static char normbordercolor[]       = "#444444";
+static char *colors[][3] = {
+    /*               fg           bg           border   */
+    [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+    [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+};
 
 /* Autostart */
 static const char *const autostart[] = {
-		"sh", "-c", "slstatus", NULL,
-		"sh", "-c", "~/.fehbg &", NULL,
-		"sh", "-c", "xset s off -dpms &", NULL,
-		"sh", "-c", "pgrep -x \"dunst\" >/dev/null || dunst &", NULL,
-		"sh", "-c", "pgrep -x \"picom\" >/dev/null || picom &", NULL,
-		"sh", "-c", "pgrep -x \"greenclip\" >/dev/null || greenclip daemon &", NULL,
+    "sh", "-c", "slstatus", NULL,
+    "sh", "-c", "~/.fehbg &", NULL,
+    "sh", "-c", "xset s off -dpms &", NULL,
+    "sh", "-c", "pgrep -x \"dunst\" >/dev/null || dunst &", NULL,
+    "sh", "-c", "pgrep -x \"picom\" >/dev/null || picom &", NULL,
+    "sh", "-c", "pgrep -x \"greenclip\" >/dev/null || greenclip daemon &", NULL,
     NULL
 };
 
-static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     switchtotag    isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            0,             1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,             0,           -1 },
+/* Tagging */
+static const char *tags[] = {
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
 };
 
-/* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+
+/* WM Class Rules */
+static const Rule rules[] = {
+    /* class                 instance    title       tags mask  switchtotag   isfloating   monitor    */
+    { "jetbrains-datagrip",  NULL,       NULL,       1 << 3,    0,             0,           -1 },
+    { "Postman",             NULL,       NULL,       1 << 4,    0,             0,           -1 },
+    { "bruno",               NULL,       NULL,       1 << 4,    0,             0,           -1 },
+    { "calibre",             NULL,       NULL,       1 << 5,    0,             0,           -1 },
+    { "obsidian",            NULL,       NULL,       1 << 5,    0,             0,           -1 },
+    { "qBittorrent",         NULL,       NULL,       1 << 5,    0,             0,           -1 },
+    { "mpv",                 NULL,       NULL,       1 << 6,    1,            -1,           -1 },
+    { "vesktop",             NULL,       NULL,       1 << 7,    0,             0,           -1 },
+    { "St",                  NULL,       "ncmpcpp",  0,         0,            -1,           -1 },
+    { "Nsxiv",               NULL,       NULL,       0,         0,             1,           -1 },
+};
+
+/* Layouts */
+static const int nmaster             = 1;
+static const int resizehints         = 1;
+static const float mfact             = 0.50;
+static const int floatuserwidth      = 1200;
+static const int floatuserheight     = 600;
+static const int lockfullscreen      = 1;
+
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
 
-/* key definitions */
-#define MODKEY Mod1Mask
+/* Key Definitions */
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+    { MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+    { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+    { MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+    { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
+/* Utility to run sh commands */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* Commands */
@@ -73,6 +101,7 @@ static const char *termcmd[] = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
+/* Keys */
 static const Key keys[] = {
     /* modifier             key                 function        argument */
 
@@ -141,37 +170,29 @@ static const Key keys[] = {
     TAGKEYS(XK_0,           9)
 
     /* --- Screenshots --- */
-		{ ControlMask,XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s save && notify-send 'Saved in disk'") },
-		{ Mod1Mask,   XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s save && notify-send 'Saved in disk'") },
-		{ MODKEY,     XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s clip && notify-send 'Saved in clipboard'") },
-		{ 0,          XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s clip && notify-send 'Saved in clipboard'") },
+    { ControlMask,XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s save && notify-send 'Saved in disk'") },
+    { Mod1Mask,   XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s save && notify-send 'Saved in disk'") },
+    { MODKEY,     XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m full -s clip && notify-send 'Saved in clipboard'") },
+    { 0,          XK_Print,   spawn, SHCMD("~/bin/wm/take-screenshots -m select -s clip && notify-send 'Saved in clipboard'") },
 
     /* --- Hardware Keys --- */
-		{ 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("~/bin/wm/volume-dunst up") },
-		{ 0, XF86XK_AudioLowerVolume, spawn, SHCMD("~/bin/wm/volume-dunst down") },
-		{ 0, XF86XK_AudioMute,        spawn, SHCMD("~/bin/wm/volume-dunst mute") },
+    { 0, XF86XK_AudioRaiseVolume, spawn, SHCMD("~/bin/wm/volume-dunst up") },
+    { 0, XF86XK_AudioLowerVolume, spawn, SHCMD("~/bin/wm/volume-dunst down") },
+    { 0, XF86XK_AudioMute,        spawn, SHCMD("~/bin/wm/volume-dunst mute") },
 };
 
-/* button definitions */
-/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+/* Mouse buttons */
 static const Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+    { ClkTagBar,    0,			Button1, view,        {0} },
+    { ClkLtSymbol,  0,			Button1, setlayout,   {0} },
+    { ClkClientWin, MODKEY, Button3, resizemouse, {0} },
+    { ClkClientWin, MODKEY, Button1, movemouse,   {0} },
 };
 
 /* signal definitions */
 /* signum must be greater than 0 */
 /* trigger signals using `xsetroot -name "fsignal:<signum>"` */
 static Signal signals[] = {
-	/* signum       function        argument  */
-	{ 1,            setlayout,      {.v = 0} },
+    /* signum       function        argument  */
+    { 1,            xrdb,						{.v = 0} },
 };
